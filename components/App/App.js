@@ -1,12 +1,19 @@
 import Head from "next/head";
 import Link from 'next/link'
+import authorization from "../../stores/authorization";
+import {observer} from "mobx-react";
 
-const App = ({children, tittle = "Главная"}) => {
+
+const App = observer(({children, tittle = "Главная"}) => {
+
     return <>
         <Head>
             <title>{tittle}</title>
         </Head>
-        <header>Шапка</header>
+        <header>
+            {authorization.auth ? "авторизован": "не авторизован"}
+        <button onClick={() => authorization.setAuth(false)}>Выход</button>
+        </header>
         <nav>
             <Link href={'/'}>Главная страница</Link>
             <Link href={'/authorization'}>Авторизация</Link>
@@ -16,5 +23,6 @@ const App = ({children, tittle = "Главная"}) => {
             {children}
         </main>
     </>
-}
+})
+
 export default App
