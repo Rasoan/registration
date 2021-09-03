@@ -13,7 +13,7 @@ import {Button, Checkbox} from 'antd';
 
 const AuthorizationForm = observer(() => {
     const router = useRouter()
-    const {Text} = Typography
+    const {Text, Title} = Typography
 
     const schema = yup.object().shape({
         login: yup.string().email("Логин это email!").required("Поле обязательно для заполнения"),
@@ -50,6 +50,7 @@ const AuthorizationForm = observer(() => {
     }
 
     return <div className={style.wrapper}>
+        <Title className={style.header} level={4}>Авторизуйтесь пожалуйста</Title>
         <form className={style.form}>
             <div className={style['form__container']}>
                 <Controller

@@ -14,7 +14,6 @@ const Authorization = () => {
     }, [])
 
     return <>
-        <p>Страница авторизации</p>
         <AuthorizationForm/>
     </>
 }
