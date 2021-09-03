@@ -20,11 +20,11 @@ class Authorization {
     }
 }
 
-const autorization = new Authorization()
+const authorization = new Authorization()
 
 autorun(() => {
-    autorization.auth.isAuth = localStorage.getItem('auth')
-    autorization.auth.initialized = true
+    authorization.auth.isAuth = localStorage.getItem('auth')
+    authorization.auth.initialized = true
 });
 
-export default autorization
+export default authorization

@@ -4,20 +4,26 @@ import authorization from "../stores/authorization";
 import {observer} from "mobx-react";
 import {useEffect} from "react";
 import Link from "next/link";
+import {Typography} from "antd";
 
 const Home = () => {
-  const router = useRouter()
+    const {Text} = Typography
+    const router = useRouter()
 
-  useEffect(() => {
-    if (!authorization.auth.isAuth) {
-      router.push("/authorization")
-    }
-  }, [])
+    useEffect(() => {
+        if (!authorization.auth.isAuth) {
+            router.push("/authorization")
+        }
+    }, [])
 
-  return <Index>
-    <p>Главная страница</p>
-    <Link href={"/profile"}><a>Перейти к профайлу</a></Link>
-  </Index>
+    return <div>
+        <div>
+            <Text>Главная страница</Text>
+        </div>
+        <Link href={"/profile"}><a>
+            Перейти к профайлу
+        </a></Link>
+    </div>
 }
 
 export default observer(Home)

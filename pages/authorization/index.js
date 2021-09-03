@@ -7,11 +7,9 @@ import {useRouter} from "next/router";
 const Authorization = () => {
     const router = useRouter()
 
-    useEffect(() => {
-        if (authorization.auth.isAuth) {
-            router.push("/profile")
-        }
-    }, [])
+    if (authorization.auth.isAuth) {
+        router.push("/profile")
+    }
 
     return <>
         <AuthorizationForm/>

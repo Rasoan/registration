@@ -23,6 +23,8 @@ const App = observer(({children, tittle = "Главная"}) => {
         }
     }, [])
 
+
+
     return <>
         <Head>
             <title>{tittle}</title>

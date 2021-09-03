@@ -29,7 +29,6 @@ const AuthorizationForm = observer(() => {
     });
 
     const onSubmit = data => {
-        console.log(data)
         if (data.login !== profile.login) {
             setError("login", {})
             return
@@ -43,9 +42,9 @@ const AuthorizationForm = observer(() => {
         authorization.comeIn()
         router.push("/profile")
         if (data.rememberMe) {
-            window.localStorage.setItem('auth', true)
+            window.localStorage.setItem('auth', "true")
         } else {
-            window.localStorage.setItem('auth', false)
+            window.localStorage.setItem('auth', "false")
         }
     }
 
@@ -68,7 +67,7 @@ const AuthorizationForm = observer(() => {
                     name="password"
                     control={control}
                     render={({field}) => {
-                        return <Input {...field} size="large" placeholder="Пароль" prefix={<ToolOutlined/>}/>; // ✅
+                        return <Input {...field} size="large" placeholder="Пароль" prefix={<ToolOutlined/>} />
                     }}
                 />
                 {errors.password && <Text type={"danger"}>{errors.password.message}</Text>}
@@ -82,10 +81,13 @@ const AuthorizationForm = observer(() => {
                 />
             </div>
             <div>
-                {(errors.login || errors.password) && <div>неверный пароль или логин</div>}
+                {(errors.login || errors.password) && <Text type={"danger"}>неверный пароль или логин</Text>}
             </div>
             <div>
-               <Button className={style['field-button']} size={"large"} type="primary" onClick={handleSubmit(onSubmit)} >Войти</Button>
+               <Button className={style['field-button']}
+                       size={"large"}
+                       type="primary"
+                       onClick={handleSubmit(onSubmit)}>Войти</Button>
             </div>
         </form>
     </div>
