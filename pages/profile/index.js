@@ -1,12 +1,12 @@
-import App from "../../components/App/App";
+import Index from "../../components/App";
 import {observer} from "mobx-react";
 import AboutMe from "../../components/AboutMe";
 
 const Profile = () => {
     return <>
-        <App tittle={"Профайл"}>
+        <Index tittle={"Профайл"}>
             <AboutMe />
-        </App>
+        </Index>
     </>
 }
 export default observer(Profile)

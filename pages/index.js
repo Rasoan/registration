@@ -1,4 +1,4 @@
-import App from "../components/App/App";
+import Index from "../components/App";
 import {useRouter} from "next/router";
 import authorization from "../stores/authorization";
 import {observer} from "mobx-react";
@@ -14,10 +14,10 @@ const Home = () => {
     }
   }, [])
 
-  return <App>
+  return <Index>
     <p>Главная страница</p>
     <Link href={"/profile"}><a>Перейти к профайлу</a></Link>
-  </App>
+  </Index>
 }
 
 export default observer(Home)

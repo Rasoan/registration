@@ -1,42 +1,58 @@
+import style from "./style.module.scss"
 import profile from "../../stores/profile";
-import Image from "next/image";
+import {Space, Table} from "antd";
+import Image from  'next/image'
 
 export default function AboutMe() {
-    return <>
-        <Image src={profile.photo} width={100} height={100} alt="Picture of the author" />
-        <table>
-            <tr>
-                <td>
-                    логин
-                </td>
-                <td>
-                    {profile.login}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                   Имя
-                </td>
-                <td>
-                    {profile.name}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Фамилия
-                </td>
-                <td>
-                    {profile.surname}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Дата рождения
-                </td>
-                <td>
-                    {profile.dateOfBirth}
-                </td>
-            </tr>
-        </table>
-    </>
+    const columns = [
+        {
+            title: 'Tittle',
+            dataIndex: 'tittle',
+            key: 'tittle',
+        },
+        {
+            title: 'Description',
+            dataIndex: 'description',
+            key: 'description',
+        },
+    ];
+
+    const dataSource = [
+        {
+            key: '1',
+            tittle: "Логин",
+            description: profile.login,
+        },
+        {
+            key: '2',
+            tittle: "Фамилия",
+            description: profile.surname,
+        },
+        {
+            key: '3',
+            tittle: "Имя",
+            description: profile.name,
+        },
+        {
+            key: '4',
+            tittle: "Дата рождения",
+            description: profile.dateOfBirth,
+        },
+    ];
+
+    return <div className={style.container}>
+        <Space align="center">
+            <Image width={300}
+                   height={240}
+                   className={style.photo}
+                   alt={`${profile.surname} ${profile.name}`}
+                   src={profile.photo}
+            />
+            <Table dataSource={dataSource}
+                   columns={columns}
+                   showHeader={false}
+                   pagination={false}
+            />
+        </Space>
+    </div>
 }
