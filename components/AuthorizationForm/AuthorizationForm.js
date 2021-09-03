@@ -4,8 +4,10 @@ import {useForm} from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import profile from "../../stores/profile";
+import {useRouter} from "next/router";
 
 const AuthorizationForm = observer(() => {
+    const router = useRouter()
     const schema = yup.object().shape({
         login: yup.string().required(),
         password: yup.string().required(),
@@ -27,7 +29,9 @@ const AuthorizationForm = observer(() => {
             return;
         }
 
-        authorization.setAuth(true)
+        authorization.comeIn()
+        router.push("/profile")
+        window.localStorage.setItem('auth', true)
     }
 
     return <>

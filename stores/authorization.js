@@ -3,8 +3,12 @@ import {makeAutoObservable} from "mobx";
 class Authorization {
     auth = false
 
-    setAuth(auth) {
-        this.auth = auth
+    comeIn() {
+        this.auth = true
+    }
+
+    logOut() {
+        this.auth = false
     }
 
     constructor() {
