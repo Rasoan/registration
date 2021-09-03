@@ -1,10 +1,12 @@
 import App from "../../components/App/App";
+import {observer} from "mobx-react";
+import AboutMe from "../../components/AboutMe";
 
 const Profile = () => {
     return <>
         <App tittle={"Профайл"}>
-            <p>Страница профайла</p>
+            <AboutMe />
         </App>
     </>
 }
-export default Profile
+export default observer(Profile)

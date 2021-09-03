@@ -1,14 +1,18 @@
-import {makeAutoObservable} from "mobx";
+import {autorun, makeAutoObservable} from "mobx";
+import localStorage from 'mobx-localstorage';
 
 class Authorization {
-    auth = false
+    auth = {
+        isAuth: null,
+        initialized: null,
+    }
 
     comeIn() {
-        this.auth = true
+        this.auth.isAuth = true
     }
 
     logOut() {
-        this.auth = false
+        this.auth.isAuth = false
     }
 
     constructor() {
@@ -16,4 +20,11 @@ class Authorization {
     }
 }
 
-export default new Authorization()
+const autorization = new Authorization()
+
+autorun(() => {
+    autorization.auth.isAuth = localStorage.getItem('auth')
+    autorization.auth.initialized = true
+});
+
+export default autorization
