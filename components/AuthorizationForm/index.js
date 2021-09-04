@@ -39,13 +39,8 @@ const AuthorizationForm = observer(() => {
             return;
         }
 
-        authorization.comeIn()
+        authorization.comeIn(data.rememberMe)
         router.push("/profile")
-        if (data.rememberMe) {
-            window.localStorage.setItem('auth', "true")
-        } else {
-            window.localStorage.setItem('auth', "false")
-        }
     }
 
     return <div className={style.wrapper}>

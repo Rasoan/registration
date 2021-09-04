@@ -14,7 +14,6 @@ const App = observer(({children, tittle = "Главная"}) => {
     const logOut = () => {
         authorization.logOut()
         router.push("/authorization")
-        window.localStorage.setItem('auth', false)
     }
 
     useEffect(() => {
@@ -23,13 +22,11 @@ const App = observer(({children, tittle = "Главная"}) => {
         }
     }, [])
 
-
-
     return <>
         <Head>
             <title>{tittle}</title>
         </Head>
-        {autorization.auth.initialized ? <>
+        {/*{autorization.auth.initialized ? <>*/}
             <header>
                 {authorization.auth &&
                 <Button type={"primary"}
@@ -41,7 +38,7 @@ const App = observer(({children, tittle = "Главная"}) => {
             <main>
                 {children}
             </main>
-        </> : "Загрузка"}
+        {/*</> : "Загрузка"}*/}
     </>
 })
 
