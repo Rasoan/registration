@@ -1,5 +1,4 @@
 import AuthorizationForm from "../../components/AuthorizationForm";
-import {useEffect} from "react";
 import {observer} from "mobx-react";
 import authorization from "../../stores/authorization";
 import {useRouter} from "next/router";
@@ -9,6 +8,10 @@ const Authorization = () => {
 
     if (authorization.auth.isAuth) {
         router.push("/profile")
+    }
+
+    if (authorization.auth.isAuth) {
+        return <p>Загрузка</p>
     }
 
     return <>

@@ -1,4 +1,3 @@
-import Index from "../components/App";
 import {useRouter} from "next/router";
 import authorization from "../stores/authorization";
 import {observer} from "mobx-react";
@@ -15,6 +14,10 @@ const Home = () => {
             router.push("/authorization")
         }
     }, [])
+
+    if (!authorization.auth.isAuth) {
+        return <p>Загрузка</p>
+    }
 
     return <div>
         <div>

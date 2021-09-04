@@ -29,7 +29,7 @@ class Authorization {
 
 const authorization = new Authorization()
 
-autorun(() => {
+autorun( () => {
     authorization.auth.isAuth = localStorage.getItem('auth')
     authorization.auth.initialized = true
 });
