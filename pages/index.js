@@ -4,6 +4,7 @@ import {observer} from "mobx-react";
 import {useEffect} from "react";
 import Link from "next/link";
 import {Typography} from "antd";
+import Authorization from "./authorization";
 
 const Home = () => {
     const {Text} = Typography
@@ -15,18 +16,16 @@ const Home = () => {
         }
     }, [])
 
-    if (!authorization.auth.isAuth) {
-        return <p>Загрузка</p>
-    }
-
-    return <div>
-        <div>
-            <Text>Главная страница</Text>
-        </div>
-        <Link href={"/profile"}><a>
-            Перейти к профайлу
-        </a></Link>
-    </div>
+    return <>
+        {authorization.auth.isAuth ? <main>
+            <div>
+                <Text>Главная страница</Text>
+            </div>
+            <Link href={"/profile"}><a>
+                Перейти к профайлу
+            </a></Link>
+        </main> : <Authorization />}
+    </>
 }
 
 export default observer(Home)

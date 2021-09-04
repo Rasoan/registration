@@ -5,6 +5,7 @@ import {observer} from "mobx-react";
 import {useRouter} from "next/router";
 import {useEffect} from "react";
 import {Button} from "antd";
+import Authorization from "../../pages/authorization";
 
 const App = observer(({children, tittle = "Главная"}) => {
     const router = useRouter()
@@ -16,29 +17,23 @@ const App = observer(({children, tittle = "Главная"}) => {
 
     useEffect(() => {
         if (!authorization.auth.isAuth) {
-            console.log("перенаправлю")
             router.push("/authorization")
         }
     }, [])
-
-    if (!authorization.auth.isAuth) {
-        return <p>Загрузка</p>
-    }
 
     return <>
         <Head>
             <title>{tittle}</title>
         </Head>
-        <header>
-            {authorization.auth &&
+        {authorization.auth.isAuth && <header>
             <Button type={"primary"}
                     ghost
                     className={style.exit} onClick={() => logOut()}>
                 Выход
-            </Button>}
-        </header>
+            </Button>
+        </header>}
         <main>
-            {children}
+            {authorization.auth.isAuth ? children: <Authorization />}
         </main>
     </>
 })
