@@ -1,4 +1,4 @@
-import {action, autorun, makeAutoObservable, makeObservable, observable, reaction} from "mobx";
+import {action, autorun, makeObservable, observable, reaction} from "mobx";
 import localStorage from 'mobx-localstorage';
 
 class Authorization {
@@ -9,7 +9,6 @@ class Authorization {
     }
 
     comeIn(rememberMe) {
-        console.log("comeIn rememberMe", rememberMe)
         this.auth.isAuth = true
         this.auth.rememberMe = rememberMe
     }
@@ -42,6 +41,6 @@ reaction(() => JSON.stringify(authorization.auth),
         } else {
             localStorage.setItem('auth', false)
         }
-    }, {delay: 500})
+    })
 
 export default authorization
