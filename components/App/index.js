@@ -28,7 +28,7 @@ const App = observer(({children, tittle = "Главная"}) => {
             <title>{tittle}</title>
         </Head>
             {isAuth ? <main className={style.wrapper}>
-                <div className={style.wrapperExit}>
+                <div>
                     <Button type={"primary"}
                             ghost
                             className={style.exit} onClick={() => logOut()}>
