@@ -2,25 +2,25 @@ import {action, autorun, makeObservable, observable, reaction} from "mobx";
 import localStorage from 'mobx-localstorage';
 
 class Authorization {
-    auth = {
-        isAuth: null,
-        rememberMe: null,
-        initialized: null,
-    }
+    isAuth = null
+    rememberMe = null
+    initialized = null
 
     comeIn(rememberMe) {
-        this.auth.isAuth = true
-        this.auth.rememberMe = rememberMe
+        this.isAuth = true
+        this.rememberMe = rememberMe
     }
 
     logOut() {
-        this.auth.isAuth = false
-        this.auth.rememberMe = false
+        this.isAuth = false
+        this.rememberMe = false
     }
 
     constructor() {
         makeObservable(this, {
-            auth: observable,
+            isAuth: observable,
+            rememberMe: observable,
+            initialized: observable,
             comeIn: action,
             logOut: action,
         })
@@ -29,15 +29,15 @@ class Authorization {
 
 const authorization = new Authorization()
 
-autorun( () => {
-    authorization.auth.isAuth = localStorage.getItem('auth')
-    authorization.auth.initialized = true
+autorun(() => {
+    authorization.isAuth = localStorage.getItem('auth')
+    authorization.initialized = true
 });
 
-reaction(() => JSON.stringify(authorization.auth),
+reaction(() => JSON.stringify(authorization.isAuth),
     () => {
-        if (authorization.auth.rememberMe) {
-            localStorage.setItem('auth', authorization.auth.isAuth)
+        if (authorization.rememberMe) {
+            localStorage.setItem('auth', authorization.isAuth)
         } else {
             localStorage.setItem('auth', false)
         }

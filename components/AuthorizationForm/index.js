@@ -23,7 +23,7 @@ const AuthorizationForm = observer(() => {
         rememberMe: yup.bool(),
     });
 
-    const {register, handleSubmit, watch, formState: {errors}, setError, control} = useForm({
+    const { handleSubmit, formState: {errors}, setError, control} = useForm({
         mode: 'onSubmit',
         resolver: yupResolver(schema)
     });
@@ -52,37 +52,43 @@ const AuthorizationForm = observer(() => {
                     control={control}
                     render={({field}) => {
                         return <Input className={style.field} {...field} size="large" placeholder="Логин"
-                                      prefix={<UserOutlined/>}/>; // ✅
+                                      prefix={<UserOutlined/>}/>
                     }}
                 />
-                {errors.login && <Text type="danger">{errors.login.message}</Text>}
+                {errors.login && <Text className={style['field__promt']} type="danger">{errors.login.message}</Text>}
             </div>
             <div className={style['form__container']}>
                 <Controller
                     name="password"
                     control={control}
                     render={({field}) => {
-                        return <Input {...field} size="large" placeholder="Пароль" prefix={<ToolOutlined/>} />
+                        return <Input {...field} size="large" placeholder="Пароль" prefix={<ToolOutlined/>}/>
                     }}
                 />
-                {errors.password && <Text type={"danger"}>{errors.password.message}</Text>}
+                {errors.password &&
+                <Text className={style['field__promt']} type={"danger"}>{errors.password.message}</Text>}
             </div>
             <div className={style['form__container-rememberMe']}>
                 <Controller control={control}
-                            {...register("rememberMe")}
-                            render={({field}) => {
-                                return <Checkbox {...field}>Запомнить меня</Checkbox>
+                            name="rememberMe"
+                            render={({field: { onChange, name }}) => {
+                                return <Checkbox name={name}
+                                                 onChange={onChange}
+                                >
+                                    Запомнить меня
+                                </Checkbox>
                             }}
                 />
             </div>
             <div>
-                {(errors.login || errors.password) && <Text type={"danger"}>неверный пароль или логин</Text>}
+                {(errors.login || errors.password) &&
+                <Text className={style['field__promt-all']} type={"danger"}>неверный пароль или логин</Text>}
             </div>
             <div>
-               <Button className={style['field-button']}
-                       size={"large"}
-                       type="primary"
-                       onClick={handleSubmit(onSubmit)}>Войти</Button>
+                <Button className={style['field-button']}
+                        size={"large"}
+                        type="primary"
+                        onClick={handleSubmit(onSubmit)}>Войти</Button>
             </div>
         </form>
     </div>

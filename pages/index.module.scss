@@ -1,0 +1,13 @@
+.container {
+display: flex;
+  justify-content: center;
+  padding: 100px 0;
+}
+
+.link {
+  font-size: 40px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

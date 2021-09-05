@@ -3,12 +3,13 @@ import Head from "next/head";
 import authorization from "../../stores/authorization";
 import {observer} from "mobx-react";
 import {useRouter} from "next/router";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Button} from "antd";
 import Authorization from "../../pages/authorization";
 
 const App = observer(({children, tittle = "Главная"}) => {
     const router = useRouter()
+    const [isAuth, setIsAuth] = useState(false)
 
     const logOut = () => {
         authorization.logOut()
@@ -16,7 +17,8 @@ const App = observer(({children, tittle = "Главная"}) => {
     }
 
     useEffect(() => {
-        if (!authorization.auth.isAuth) {
+        setIsAuth(authorization.isAuth)
+        if (!authorization.isAuth) {
             router.push("/authorization")
         }
     }, [])
@@ -25,16 +27,18 @@ const App = observer(({children, tittle = "Главная"}) => {
         <Head>
             <title>{tittle}</title>
         </Head>
-        {authorization.auth.isAuth && <header>
-            <Button type={"primary"}
-                    ghost
-                    className={style.exit} onClick={() => logOut()}>
-                Выход
-            </Button>
-        </header>}
-        <main>
-            {authorization.auth.isAuth ? children: <Authorization />}
-        </main>
+            {isAuth ? <main className={style.wrapper}>
+                <div className={style.wrapperExit}>
+                    <Button type={"primary"}
+                            ghost
+                            className={style.exit} onClick={() => logOut()}>
+                        Выход
+                    </Button>
+                </div>
+                <div>
+                    {children}
+                </div>
+            </main> : <Authorization />}
     </>
 })
 

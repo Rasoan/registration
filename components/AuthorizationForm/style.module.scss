@@ -18,10 +18,21 @@
   &-button {
     display: block;
     width: 80%;
-    margin: auto;
+    margin: 20px auto;
+  }
+
+  &__promt {
+    display: block;
+    margin: 5px 0;
+  }
+
+  &__promt-all {
+    display: block;
+    text-align: center;
   }
 }
 
 .header {
   text-align: center;
 }
+
